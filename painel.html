@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Painel - Minhas Bobeiras</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .painel {
+      max-width: 800px;
+      margin: 30px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .painel h2 { margin-bottom: 15px; }
+    .painel label { display: block; margin-top: 10px; }
+    .painel input, .painel textarea, .painel select {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .painel button {
+      margin-top: 15px;
+      padding: 10px 15px;
+      background-color: #222;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .output {
+      margin-top: 20px;
+      white-space: pre-wrap;
+      background: #f4f4f4;
+      padding: 10px;
+      border-radius: 8px;
+      font-family: monospace;
+    }
+    body.dark .painel { background-color: #1e1e1e; }
+    body.dark .output { background-color: #333; color: #eee; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Painel - Minhas Bobeiras</h1>
+    <nav>
+      <a href="index.html">Início</a>
+      <a href="categorias.html">Categorias</a>
+      <a href="painel.html">Painel</a>
+      <button id="toggle-dark">🌙</button>
+    </nav>
+  </header>
+
+  <div class="painel">
+    <h2>Gerador de Post</h2>
+    <label for="img">URL da Imagem:</label>
+    <input type="text" id="img" placeholder="https://...">
+
+    <label for="titulo">Título do Post:</label>
+    <input type="text" id="titulo" placeholder="Título do post">
+
+    <label for="descricao">Descrição:</label>
+    <textarea id="descricao" rows="3" placeholder="Descrição ou legenda opcional"></textarea>
+
+    <label for="categoria">Categoria:</label>
+    <select id="categoria">
+      <option>Humor</option>
+      <option>Fails</option>
+      <option>Curiosidades</option>
+      <option>Animais</option>
+      <option>Outros</option>
+    </select>
+
+    <button onclick="gerarPost()">Gerar Código</button>
+
+    <div class="output" id="codigo"></div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Minhas Bobeiras - Todos os direitos reservados.</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    function gerarPost() {
+      const img = document.getElementById('img').value.trim();
+      const titulo = document.getElementById('titulo').value.trim();
+      const descricao = document.getElementById('descricao').value.trim();
+      const categoria = document.getElementById('categoria').value;
+      const codigo = `
+<div class="post ${categoria.toLowerCase()}">
+  <img src="\${img}" alt="\${titulo}">
+  <h2>\${titulo}</h2>
+  <p>\${descricao}</p>
+</div>`;
+      document.getElementById('codigo').textContent = codigo;
+    }
+  </script>
+</body>
+</html>
